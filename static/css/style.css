@@ -80,17 +80,6 @@ header{
 }
 
 
-
-header#inicio p#sub{
-
-    color: white;
-    font-size: 1.3vw;
-    text-shadow: 0.1em 0.1em 0.2em black;
-
-    position: absolute;
-    top: 33%; left: 39%
-}
-
 header#inicio div p{
     
     font-size: 4vw;     
@@ -101,9 +90,20 @@ header#inicio div p{
     font-family: 'Poppins', sans-serif;
     
     position:absolute;
-    top: 20%; left: 30%;
+    top: 20%; left: 33%;
     right: 30%;
 } 
+
+header#inicio p#sub{
+
+    color: white;
+    font-size: 1.3vw;
+    text-shadow: 0.1em 0.1em 0.2em black;
+
+    position: absolute;
+    top: 33%; left: 40%
+}
+
 
 
 
