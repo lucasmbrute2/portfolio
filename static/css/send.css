@@ -1,0 +1,63 @@
+/* Página Send */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+section#success{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #49447c;
+
+}
+
+section#success div#card{
+    background-color: #f0789e;
+    text-align: center;
+    padding: 4rem;
+    border-radius: 2rem;
+    color: #fff;
+    width: 40%;
+    text-shadow: .1em .1em .2em black;
+    
+}
+
+section#success div#card h1{
+    margin: 2rem 0rem;
+}
+
+section#success div#card i{
+    font-size: 5rem;
+}
+
+section#success div#card h3{
+    margin-bottom: 2rem;
+}
+
+section#success div#card p{
+    margin-bottom: 3rem;
+    width: 100%;
+    word-break: break-word;
+}
+
+section#success div#card a{
+    text-decoration: none;
+    padding: 1rem;
+    border: 1px solid black;
+    color:black;
+    border-radius: .4rem;
+    transition: all .4s ease-out;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: none
+}
+
+section#success div#card a:hover{
+    background-color: #49447c;
+    color: #fff
+}
+    
