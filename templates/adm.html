@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,23 @@
     <title>Portfólio | Adm</title>
     <link rel="stylesheet" href="">
 </head>
+
 <body>
     <a href="/back_index">Voltar</a>
-    
+
     <h1>Olá, você chegou :)</h1>
-    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+
+
     <form action='/new' method="POST">
 
         <h1>Cadastre um novo projeto</h1>
@@ -47,19 +60,26 @@
         </thead>
 
         <tbody>
-            <td>id</td>
-            <td></td>nome</td>
-            <td>imagem</td>
-            <td>link</td>
-            <td>descricao</td>
+            {%for p in projetos%}
+                <tr>
+
+                    <td>{{p.id}}</td>
+                    <td></td>{{p.nome}}</td>
+                    <td>{{p.imagem}}</td>
+                    <td>{{p.link}}</td>
+                    <td>{{p.descricao}}</td>
+                </tr>
+            {%endfor%}
+
         </tbody>
-        
+
     </table>
 
 
     </form>
 
 
-
+    <script src="../static/js/adm.js"></script>
 </body>
+
 </html>
