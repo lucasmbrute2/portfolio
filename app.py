@@ -20,7 +20,7 @@ app.config.update(mail_settings)
 mail = Mail(app)
 db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://cuoysxes:yM2YX50ph8obxJPs1YiEjzPR87cSTcsO@kesavan.db.elephantsql.com/cuoysxes'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ftscrvix:7YN3Tyulj-1CSrWxfzHoyyB478qSCPs9@kesavan.db.elephantsql.com/ftscrvix'
 
 
 class Contato:
@@ -36,7 +36,7 @@ class Projeto(db.Model):
     #Aqui é construido as colunas do DB
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     nome = db.Column(db.String(150), nullable=False)
-    imagem = db.Column(db.String(6000),nullable=False) #Aqui será usado apenas URLS de imagens, não serão feitos uploads.    
+    imagem = db.Column(db.String(7000),nullable=False) #Aqui será usado apenas URLS de imagens, não serão feitos uploads.    
     descricao = db.Column(db.String(600), nullable=False)
     link = db.Column(db.String(1000), nullable=False)
 
@@ -56,8 +56,8 @@ def index():
 
 @app.route('/admin')
 def adm():
-    projetos = Projeto.query.all()
-    return render_template('adm.html', projetos= projetos) # no CRUD esse é o READ
+    return render_template('admin.html')
+     # no CRUD esse é o READ
 
 
 
@@ -68,7 +68,7 @@ def back():
 
 #CRUD - CREATE
 @app.route('/new', methods=['GET','POST'])
-def new():
+def novo_projeto():
     if request.method == 'POST':
         projeto = Projeto(
 
@@ -80,7 +80,8 @@ def new():
         db.session.add(projeto)
         db.session.commit()
         flash('Deu bom, confia!')
-        return redirect('/admin')
+        projetos = Projeto.query.all()
+        return render_template('admin.html', link = projeto.imagem, projetos = projetos )
 
 
 @app.route('/send', methods =['GET', 'POST'])
