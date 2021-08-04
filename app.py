@@ -51,12 +51,14 @@ class Projeto(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    projetos = Projeto.query.all()
+    return render_template('index.html', projetos = projetos)
 
 
 @app.route('/admin')
 def adm():
-    return render_template('admin.html')
+    projetos = Projeto.query.all()
+    return render_template('admin.html', projetos = projetos)
      # no CRUD esse é o READ
 
 
@@ -82,6 +84,27 @@ def novo_projeto():
         flash('Deu bom, confia!')
         projetos = Projeto.query.all()
         return render_template('admin.html', link = projeto.imagem, projetos = projetos )
+
+
+#CRUD - DELETE
+@app.route('/delete/<id>')
+def delete(id): 
+    projeto = Projeto.query.get(id)
+    db.session.delete(projeto)
+    db.session.commit()
+    return redirect('/admin')
+
+
+
+
+#Autentiacação e login
+
+
+
+
+
+
+
 
 
 @app.route('/send', methods =['GET', 'POST'])
