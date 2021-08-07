@@ -65,7 +65,7 @@
                 <th>Ações</th>
             </tr>
         </thead>
-
+s
         <tbody>
             {%for p in projetos%}
 <tr>
@@ -74,8 +74,8 @@
                 <td>{{p.imagem}}</td>
                 <td>{{p.link}}</td>
                 <td>{{p.descricao}}</td>
+                <td><a href="/edit/{{p.id}}">Editar</a></td>
                 <td><a href="/delete/{{p.id}}">Apagar</a></td>
-                
                 
 
             </tr>

@@ -103,7 +103,18 @@ def delete(id):
 
 #CRUD - EDITAR
 
-
+@app.route('/edit/<id>' ,methods= ['GET', 'POST'])
+def editar(id):
+    projeto = Projeto.query.get(id)
+    if request.method == 'POST':
+        projeto.nome = request.form['nome'],
+        projeto.imagem = request.form['imagem'],
+        projeto.descricao = request.form['descricao'],
+        projeto.link = request.form['link']
+        db.session.commit()
+        return redirect('/admin')
+    return render_template('admin.html', projeto = projeto)
+        
 
 
 
