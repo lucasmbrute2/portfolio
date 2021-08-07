@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio | Adm</title>
-    <link rel="stylesheet" href="../static/css/adm.css">
-    
+    <link rel="stylesheet" href="../static/css/admin.css">
+
 </head>
 
 <body>
     <a href="/back_index">Voltar</a>
-
+    
     <h1>Olá, você chegou :)</h1>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -62,18 +62,19 @@
 
         <tbody>
             {%for p in projetos%}
-                <tr>
+<tr>
+                <td>{{p.id}}</td>
+                <td>{{p.nome}}</td>
+                <td>{{p.imagem}}</td>
+                <td>{{p.link}}</td>
+                <td>{{p.descricao}}</td>
+                <td><a href="/delete/{{p.id}}">Apagar</a></td>
 
-                    <td>{{p.id}}</td>
-                    <td></td>{{p.nome}}</td>
-                    <td>{{p.imagem}}</td>
-                    <td>{{p.link}}</td>
-                    <td>{{p.descricao}}</td>
-                    <a href="/delete/{{p.id}}">Apagar</a>
-                </tr>
+
+            </tr>
             {%endfor%}
-            <img src="{{link}}" alt="">      
-                
+
+
 
         </tbody>
 

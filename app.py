@@ -36,7 +36,7 @@ class Projeto(db.Model):
     #Aqui é construido as colunas do DB
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     nome = db.Column(db.String(150), nullable=False)
-    imagem = db.Column(db.String(7000),nullable=False) #Aqui será usado apenas URLS de imagens, não serão feitos uploads.    
+    imagem = db.Column(db.String(10000),nullable=False) #Aqui será usado apenas URLS de imagens, não serão feitos uploads.    
     descricao = db.Column(db.String(600), nullable=False)
     link = db.Column(db.String(1000), nullable=False)
 
@@ -82,8 +82,8 @@ def novo_projeto():
         db.session.add(projeto)
         db.session.commit()
         flash('Deu bom, confia!')
-        projetos = Projeto.query.all()
-        return render_template('admin.html', link = projeto.imagem, projetos = projetos )
+        
+        return redirect('/admin')
 
 
 #CRUD - DELETE
