@@ -14,15 +14,7 @@
     <a href="/back_index">Voltar</a>
     
     <h1>Olá, você chegou :)</h1>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+    
 
 
 
@@ -46,6 +38,19 @@
         <button type="submit">Enviar</button>
 
     </form>
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    
+    
+
 
 
     <table>
@@ -57,6 +62,7 @@
                 <th>Imagem</th>
                 <th>Link</th>
                 <th>Descrição</th>
+                <th>Ações</th>
             </tr>
         </thead>
 
@@ -69,7 +75,8 @@
                 <td>{{p.link}}</td>
                 <td>{{p.descricao}}</td>
                 <td><a href="/delete/{{p.id}}">Apagar</a></td>
-
+                
+                
 
             </tr>
             {%endfor%}
@@ -81,7 +88,8 @@
     </table>
 
 
-    </form>
+   
+    
 
 
     <script src="../static/js/admin.js"></script>

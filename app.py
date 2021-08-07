@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, config, redirect, flash
+from flask import Flask, render_template, request, config, redirect, flash, session
 from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 
@@ -20,7 +20,8 @@ app.config.update(mail_settings)
 mail = Mail(app)
 db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ftscrvix:7YN3Tyulj-1CSrWxfzHoyyB478qSCPs9@kesavan.db.elephantsql.com/ftscrvix'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://ikirzoll:IDafq98kdWGcvOTayuxrBMOeG_e4LgRP@kesavan.db.elephantsql.com/ikirzoll'
 
 
 class Contato:
@@ -51,15 +52,19 @@ class Projeto(db.Model):
 
 @app.route('/')
 def index():
+    session['user_logado'] = None
     projetos = Projeto.query.all()
     return render_template('index.html', projetos = projetos)
 
 
 @app.route('/admin')
 def adm():
+    if 'user_logado' not in session or session['user_logado'] == None:
+        flash('Faça o login antes de acessar essa rota!')
+        return redirect('/login')
     projetos = Projeto.query.all()
     return render_template('admin.html', projetos = projetos)
-     # no CRUD esse é o READ
+    # no CRUD esse é o READ
 
 
 
@@ -81,23 +86,45 @@ def novo_projeto():
         )
         db.session.add(projeto)
         db.session.commit()
-        flash('Deu bom, confia!')
-        
         return redirect('/admin')
+        
+        
 
 
 #CRUD - DELETE
 @app.route('/delete/<id>')
-def delete(id): 
-    projeto = Projeto.query.get(id)
-    db.session.delete(projeto)
+def delete(id):
+    deletar = Projeto.query.get(id)
+    db.session.delete(deletar)
     db.session.commit()
+    flash('Projeto apagado com sucesso!')
     return redirect('/admin')
+
+
+#CRUD - EDITAR
+
+
+
 
 
 
 
 #Autentiacação e login
+@app.route('/login')
+def logar():
+    return render_template('login.html')
+
+
+
+@app.route('/auth', methods=['GET','POST'])
+def verificar():
+    if request.method == 'POST' and request.form['senha'] == 'admin':
+        session['user_logado'] = 'logado'
+        flash('Login feito com sucesso')
+        return redirect('/admin')
+    else:
+        flash("Senha inválida")
+        return render_template('login.html')
 
 
 
