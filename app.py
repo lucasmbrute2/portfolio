@@ -63,7 +63,7 @@ def adm():
         flash('Faça o login antes de acessar essa rota!')
         return redirect('/login')
     projetos = Projeto.query.all()
-    return render_template('admin.html', projetos = projetos)
+    return render_template('admin.html', projetos = projetos, projeto="")
     # no CRUD esse é o READ
 
 
@@ -106,6 +106,7 @@ def delete(id):
 @app.route('/edit/<id>' ,methods= ['GET', 'POST'])
 def editar(id):
     projeto = Projeto.query.get(id)
+    projetos = Projeto.query.all()
     if request.method == 'POST':
         projeto.nome = request.form['nome'],
         projeto.imagem = request.form['imagem'],
@@ -113,7 +114,7 @@ def editar(id):
         projeto.link = request.form['link']
         db.session.commit()
         return redirect('/admin')
-    return render_template('admin.html', projeto = projeto)
+    return render_template('admin.html', projeto = projeto, projetos = projetos)
         
 
 

@@ -12,33 +12,42 @@
 
 <body>
     <a href="/back_index">Voltar</a>
-    
+
     <h1>Olá, você chegou :)</h1>
-    
 
 
 
+    {% if projeto == "" %}
     <form action='/new' method="POST">
-
         <h1>Cadastre um novo projeto</h1>
+        {% else %}
+        <form action="/edit/{{projeto.id}}" method="POST">
+        <h1>Atualize o projeto</h1>
+        {% endif %}
+
 
         <label for="nome">Nome</label>
-        <input type="text" placeholder="Nome do projeto" id="nome" name="nome">
+        <input type="text" placeholder="Nome do projeto" id="nome" name="nome" value='{{projeto.nome}}'>
 
         <label for="imagem">Imagem</label>
-        <input type="text" placeholder="Link da imagem" id="imagem" name="imagem">
+        <input type="text" placeholder="Link da imagem" id="imagem" name="imagem" value="{{projeto.imagem}}">
 
         <label for="link">Link</label>
-        <input type="text" placeholder="Link do projeto" id="link" name="link">
+        <input type="text" placeholder="Link do projeto" id="link" name="link" value="{{projeto.link}}">
 
         <label for="descricao">Descrição</label>
         <textarea name="descricao" id="descricao" cols="30" rows="10"
-            placeholder="Digite a descrição do projeto"></textarea>
+            placeholder="Digite a descrição do projeto">{{projeto.descricao}}</textarea>
 
-        <button type="submit">Enviar</button>
+        
+        {%if projeto == ''%}
+            <button type="submit">Enviar</button>
+        {%else %}
+        <button type="submit">Atuliazar</button>
+        {% endif %}
 
     </form>
-    
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul class=flashes>
@@ -48,8 +57,8 @@
     </ul>
     {% endif %}
     {% endwith %}
-    
-    
+
+
 
 
 
@@ -65,10 +74,10 @@
                 <th>Ações</th>
             </tr>
         </thead>
-s
+        s
         <tbody>
             {%for p in projetos%}
-<tr>
+            <tr>
                 <td>{{p.id}}</td>
                 <td>{{p.nome}}</td>
                 <td>{{p.imagem}}</td>
@@ -76,7 +85,7 @@ s
                 <td>{{p.descricao}}</td>
                 <td><a href="/edit/{{p.id}}">Editar</a></td>
                 <td><a href="/delete/{{p.id}}">Apagar</a></td>
-                
+
 
             </tr>
             {%endfor%}
@@ -88,8 +97,8 @@ s
     </table>
 
 
-   
-    
+
+
 
 
     <script src="../static/js/admin.js"></script>
