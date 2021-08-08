@@ -87,8 +87,8 @@ def novo_projeto():
         db.session.add(projeto)
         db.session.commit()
         return redirect('/admin')
-        
-        
+    flash('Você não tem autorização para acessar essa rota')
+    return redirect('/login')
 
 
 #CRUD - DELETE
@@ -105,6 +105,10 @@ def delete(id):
 
 @app.route('/edit/<id>' ,methods= ['GET', 'POST'])
 def editar(id):
+    if 'user_logado' not in session or session['user_logado'] == None:
+        flash('Faça o login antes de acessar essa rota!')
+        return redirect('/login')
+    
     projeto = Projeto.query.get(id)
     projetos = Projeto.query.all()
     if request.method == 'POST':
@@ -117,6 +121,13 @@ def editar(id):
     return render_template('admin.html', projeto = projeto, projetos = projetos)
         
 
+#Pegar pelo ID
+
+
+@app.route('/<id>')
+def by_id(id):
+    projeto_del = Projeto.query.get(id)
+    return render_template('admin.html', projeto_del = projeto_del ,projeto ='')
 
 
 
